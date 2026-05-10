@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+<div class="p-6 max-w-3xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">➕ Add Product</h1>
+
+        <div class="flex gap-3">
+            <a href="/" class="bg-blue-500 px-4 py-2 rounded">Inventory</a>
+            <a href="/dashboard/" class="bg-yellow-500 px-4 py-2 rounded">Dashboard</a>
+            <a href="/orders/" class="bg-purple-500 px-4 py-2 rounded">Orders</a>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+
+            <!-- Name -->
+            <div>
+                <label class="block mb-1">Product Name</label>
+                <input type="text" name="name"
+                       class="w-full p-3 rounded bg-gray-700 text-white">
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label class="block mb-1">Description</label>
+                <textarea name="description"
+                          class="w-full p-3 rounded bg-gray-700 text-white"></textarea>
+            </div>
+
+            <!-- Price -->
+            <div>
+                <label class="block mb-1">Price</label>
+                <input type="number" name="price"
+                       class="w-full p-3 rounded bg-gray-700 text-white">
+            </div>
+
+            <!-- Quantity -->
+            <div>
+                <label class="block mb-1">Quantity</label>
+                <input type="number" name="quantity"
+                       class="w-full p-3 rounded bg-gray-700 text-white">
+            </div>
+
+            <!-- Reorder Level -->
+            <div>
+                <label class="block mb-1">Reorder Level</label>
+                <input type="number" name="reorder_level"
+                       class="w-full p-3 rounded bg-gray-700 text-white">
+            </div>
+
+            <!-- Button -->
+            <button class="w-full bg-green-500 py-3 rounded font-semibold hover:bg-green-600 transition">
+                Add Product
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+<div class="max-w-4xl mx-auto p-6">
+
+    <h1 class="text-2xl font-bold mb-6">📦 Orders</h1>
+
+    {% for order in orders %}
+    <div class="bg-gray-800 p-4 rounded-xl mb-3 flex justify-between">
+        
+        <div>
+            <p class="font-semibold">{{ order.product.name }}</p>
+            <p>Qty: {{ order.quantity }}</p>
+            <p>Status: {{ order.status }}</p>
+        </div>
+
+        <div>
+            <a href="/update-order/{{ order.id }}/"
+               class="bg-blue-500 px-3 py-1 rounded">Update</a>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>

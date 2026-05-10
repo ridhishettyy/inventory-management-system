@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+<div class="p-6 max-w-5xl mx-auto">
+
+    <h1 class="text-3xl font-bold mb-6">🚀 Dashboard</h1>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-3 gap-6">
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center">
+            <h2 class="text-lg">Products</h2>
+            <p class="text-3xl font-bold">{{ total_products }}</p>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center">
+            <h2 class="text-lg">Orders</h2>
+            <p class="text-3xl font-bold">{{ total_orders }}</p>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-xl text-center">
+            <h2 class="text-lg">Low Stock</h2>
+            <p class="text-3xl font-bold text-red-400">{{ low_stock }}</p>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="mt-6 flex gap-4">
+        <a href="/" class="bg-blue-500 px-4 py-2 rounded">Inventory</a>
+        <a href="/orders/" class="bg-purple-500 px-4 py-2 rounded">Orders</a>
+        <a href="/add/" class="bg-green-500 px-4 py-2 rounded">Add Product</a>
+    </div>
+
+    <!-- Chart -->
+    <div class="mt-10 bg-gray-800 p-6 rounded-xl">
+        <canvas id="myChart"></canvas>
+    </div>
+
+</div>
+
+<!-- Hidden JSON data (safe + clean) -->
+{{ total_products|json_script:"total_products_data" }}
+{{ total_orders|json_script:"total_orders_data" }}
+{{ low_stock|json_script:"low_stock_data" }}
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    const dataValues = [
+        JSON.parse(document.getElementById('total_products_data').textContent),
+        JSON.parse(document.getElementById('total_orders_data').textContent),
+        JSON.parse(document.getElementById('low_stock_data').textContent)
+    ];
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Products', 'Orders', 'Low Stock'],
+            datasets: [{
+                label: 'System Stats',
+                data: dataValues,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

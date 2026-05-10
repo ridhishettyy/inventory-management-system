@@ -1,0 +1,19 @@
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <body class="bg-gray-900 text-white">
+
+<div class="max-w-md mx-auto mt-10 bg-gray-800 p-6 rounded-xl">
+    <h1 class="text-xl font-bold mb-4">Create Order</h1>
+    {% if error %}
+        <p class="text-red-400">{{ error }}</p>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="bg-green-500 px-4 py-2 rounded mt-2">
+            Place Order
+        </button>
+    </form>
+</div>
+
+</body>

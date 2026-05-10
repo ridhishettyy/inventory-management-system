@@ -1,0 +1,74 @@
+<form method="GET" class="mb-6">
+    <input 
+        type="text" 
+        name="q" 
+        placeholder="Search products..."
+        class="w-full p-3 rounded bg-gray-800 text-white"
+    >
+</form>
+
+
+
+
+
+
+
+
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+<div class="p-6 max-w-5xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">📦 Inventory</h1>
+
+        <div class="flex gap-3">
+            <a href="/dashboard/" class="bg-yellow-500 px-4 py-2 rounded">Dashboard</a>
+            <a href="/add/" class="bg-green-500 px-4 py-2 rounded">Add Product</a>
+            <a href="/orders/" class="bg-purple-500 px-4 py-2 rounded">Orders</a>
+        </div>
+    </div>
+
+    <!-- Product Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        {% for product in products %}
+        <div class="bg-gray-800 p-5 rounded-xl shadow-lg">
+
+            <h2 class="text-xl font-bold">{{ product.name }}</h2>
+
+            <p class="text-gray-400 mt-1">{{ product.description }}</p>
+
+            <div class="mt-3">
+                <p>💰 ₹{{ product.price }}</p>
+                <p>📦 Quantity: {{ product.quantity }}</p>
+                <p>⚠️ Reorder Level: {{ product.reorder_level }}</p>
+            </div>
+
+            <!-- Reorder Alert -->
+            {% if product.quantity <= product.reorder_level %}
+                <p class="text-red-400 font-bold mt-2">🔄 Reorder Required</p>
+            {% endif %}
+
+            <!-- Actions -->
+            <div class="mt-4 flex gap-2">
+                <a href="/update/{{ product.id }}/"
+                   class="bg-blue-500 px-3 py-1 rounded">Edit</a>
+
+                <a href="/order/"
+                   class="bg-green-500 px-3 py-1 rounded">Order</a>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
